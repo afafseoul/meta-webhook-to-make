@@ -28,5 +28,17 @@ def webhook():
 def index():
     return '✅ Webhook Meta → Make opérationnel.'
 
+@app.route('/oauth/callback')
+def oauth_callback():
+    code = request.args.get("code")
+    if code:
+        return f"""
+        <h1>✅ Connexion réussie !</h1>
+        <p>Voici ton code, copie-le et envoie-le à Adrien :</p>
+        <div style='font-size:24px; color:green; border:1px solid #ccc; padding:10px; margin-top:10px;'>{code}</div>
+        """
+    else:
+        return "❌ Aucun code reçu."
+
 if __name__ == '__main__':
     app.run(debug=True)
